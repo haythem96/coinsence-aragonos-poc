@@ -46,6 +46,11 @@ const providerForNetwork = (network) => (
 )
 module.exports = {
   networks: {
+    ganache: {
+      host: 'localhost',
+      port: 7545,
+      network_id: '*'
+    },
     development: {
       host: 'localhost',
       port: 8545,
@@ -59,5 +64,11 @@ module.exports = {
       network_id: 4,
       provider: providerForNetwork('rinkeby')
     }
-  }
+  },
+
+  compilers: {
+    solc: {
+      version: "^0.4.24"  // ex:  "0.4.20". (Default: Truffle's installed solc)
+    }
+ }
 }

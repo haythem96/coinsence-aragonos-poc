@@ -16,33 +16,55 @@ contract Community is AragonApp {
     }
 
     //number of spaces
-    uint256 spacesCount;
+    uint256 public spacesCount;
 
+    mapping(bytes32 => Space) public spaces;
     mapping(address => uint256[]) public ownerSpaces;
 
     //list of all spaces
-    Space[] communities;
-
-    function initialize() public onlyInit {
-        initialized();
-    }
+    bytes32[] public communities;
 
     /**
      * @notice function to be called by member to create new space
-     * @param _id bytes32 keccak256 of the space name
      * @param _name string space name
      * @param _desc string space description
      * @param _members Array of members addresses
      */
-    function _createSpace(bytes32 _id, string _name, string _desc,address _owner, address[] _members) internal isInitialized {
-        Space memory community = Space(_id, _name, _desc, _owner, _members);
+    function createSpace(string _name, string _desc, address _owner, address[] _members) public {
+        require(verifyMembers(_members), "invalid member address");
+        
+        bytes32 spaceId = keccak256(abi.encodePacked(_name));
+        Space memory community = Space(spaceId, _name, _desc, _owner, _members);
         //and new space and update total spaces number
-        spacesCount = communities.push(community);
+        spaces[spaceId] = community;
+        spacesCount = communities.push(spaceId);
         //get owner spaces
         uint256[] storage relatedSpaces = ownerSpaces[_owner];
         //add new space
         relatedSpaces.push(spacesCount);
-        ownerSpaces[_owner] = relatedSpaces;
+        //ownerSpaces[_owner] = relatedSpaces;
+    }
+
+    /**
+     * @notice function to verify addresses
+     * @param _members list of addresses
+     * @return true if all addresses are valid, otherwise return false
+     */
+    function verifyMembers(address[] _members) internal pure returns(bool) {
+        for(uint i = 0; i < _members.length; i++) {
+            if(_members[i] == address(0)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     */
+    function getMemberSpacesCount(address _member) public view returns(uint256 count) {
+        require(_member != address(0), "invalid address");
+
+        return ownerSpaces[_member].length;
     }
 
 }
