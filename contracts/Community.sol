@@ -42,7 +42,6 @@ contract Community is AragonApp {
         uint256[] storage relatedSpaces = ownerSpaces[_owner];
         //add new space
         relatedSpaces.push(spacesCount);
-        //ownerSpaces[_owner] = relatedSpaces;
     }
 
     /**
@@ -60,11 +59,14 @@ contract Community is AragonApp {
     }
 
     /**
+     * @notice function to return number of spaces that belong to a member
+     * @param _member member's address
+     * @return spaces number
      */
     function getMemberSpacesCount(address _member) public view returns(uint256 count) {
         require(_member != address(0), "invalid address");
 
         return ownerSpaces[_member].length;
-    }
+    } 
 
 }
