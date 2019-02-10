@@ -1,28 +1,64 @@
 pragma solidity ^0.4.24;
 
 import "@aragon/os/contracts/apps/AragonApp.sol";
+import "@aragon/os/contracts/factory/DAOFactory.sol";
+//import "@aragon/os/contracts/apm/APMNamehash.sol";
+
 import "@aragon/os/contracts/lib/math/SafeMath.sol";
 
 
 contract Community is AragonApp {
 
-    //space strcuture
-    struct Space {
-        bytes32 id;
-        string name;
-        string description;
-        address owner;
-        address[] members;
+    bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
+
+    DAOFactory public fac;
+
+    ///@notice space name 
+    string private _name;
+
+    ///@notice space owner
+    address private _owner;
+
+    ///@notice space members
+    address[] private _members;
+
+    function initialize(DAOFactory daoFactory, string name, address[] members) public onlyInit {
+        require(verifyMembers(members), "invalid member address");
+
+        Kernel dao = daoFactory.newDAO(this);
+        ACL acl = ACL(dao.acl());
+        acl.createPermission(this, dao, dao.APP_MANAGER_ROLE(), this);
+
+        _name = name;
+        _owner = msg.sender;
+        _members = members;
+
+        acl.createPermission(_owner, this, MANAGER_ROLE, root);
+
+        initialized();
     }
 
-    //number of spaces
-    uint256 public spacesCount;
+    /**
+     * @return the name of the space.
+     */
+    function name() public view returns (string memory) {
+        return _name;
+    }
 
-    mapping(bytes32 => Space) public spaces;
-    mapping(address => uint256[]) public ownerSpaces;
+    /**
+     * @return the owner of the space
+     */
+    function owner() public view returns (address) {
+        return _owner;
+    }
 
-    //list of all spaces
-    bytes32[] public communities;
+    /**
+     */
+    function getMemberAddress(uint256 position) public view returns (address) {
+        require(position < _members.length, "member not found");
+
+        return _members[position];
+    }
 
     /**
      * @notice function to be called by member to create new space
@@ -30,18 +66,8 @@ contract Community is AragonApp {
      * @param _desc string space description
      * @param _members Array of members addresses
      */
-    function createSpace(string _name, string _desc, address _owner, address[] _members) public {
-        require(verifyMembers(_members), "invalid member address");
-        
-        bytes32 spaceId = keccak256(abi.encodePacked(_name));
-        Space memory community = Space(spaceId, _name, _desc, _owner, _members);
-        //and new space and update total spaces number
-        spaces[spaceId] = community;
-        spacesCount = communities.push(spaceId);
-        //get owner spaces
-        uint256[] storage relatedSpaces = ownerSpaces[_owner];
-        //add new space
-        relatedSpaces.push(spacesCount);
+    function getMembersCount() public view returns (uint256) {
+        return _members.length;
     }
 
     /**
@@ -49,24 +75,13 @@ contract Community is AragonApp {
      * @param _members list of addresses
      * @return true if all addresses are valid, otherwise return false
      */
-    function verifyMembers(address[] _members) internal pure returns(bool) {
-        for(uint i = 0; i < _members.length; i++) {
-            if(_members[i] == address(0)) {
+    function verifyMembers(address[] members) internal pure returns(bool) {
+        for(uint i = 0; i < members.length; i++) {
+            if(members[i] == address(0)) {
                 return false;
             }
         }
         return true;
     }
-
-    /**
-     * @notice function to return number of spaces that belong to a member
-     * @param _member member's address
-     * @return spaces number
-     */
-    function getMemberSpacesCount(address _member) public view returns(uint256 count) {
-        require(_member != address(0), "invalid address");
-
-        return ownerSpaces[_member].length;
-    } 
 
 }
