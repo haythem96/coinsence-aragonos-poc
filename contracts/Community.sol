@@ -10,6 +10,7 @@ import "@aragon/os/contracts/lib/math/SafeMath.sol";
 contract Community is AragonApp {
 
     bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
+    bytes32 public constant MINT_ROLE = keccak256("MINT_ROLE");
 
     DAOFactory public fac;
 
@@ -33,7 +34,7 @@ contract Community is AragonApp {
         _owner = msg.sender;
         _members = members;
 
-        acl.createPermission(_owner, this, MANAGER_ROLE, root);
+        acl.createPermission(_owner, this, MANAGER_ROLE, this);
 
         initialized();
     }
