@@ -1,16 +1,19 @@
 pragma solidity ^0.4.24;
 
 import "@aragon/os/contracts/apps/AragonApp.sol";
+import "@aragon/os/contracts/common/IForwarder.sol";
 import "@aragon/os/contracts/factory/DAOFactory.sol";
 //import "@aragon/os/contracts/apm/APMNamehash.sol";
 
 import "@aragon/os/contracts/lib/math/SafeMath.sol";
 
 
-contract Community is AragonApp {
+contract Community is IForwarder, AragonApp {
 
     bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
     bytes32 public constant MINT_ROLE = keccak256("MINT_ROLE");
+
+    string private constant ERROR_CAN_NOT_FORWARD = "TM_CAN_NOT_FORWARD";
 
     DAOFactory public fac;
 
@@ -83,6 +86,29 @@ contract Community is AragonApp {
             }
         }
         return true;
+    }
+
+     /**
+    * @notice Execute desired action as a token holder
+    * @dev IForwarder interface conformance. Forwards any token holder action.
+    * @param _evmScript Script being executed
+    */
+    function forward(bytes _evmScript) public {
+        require(canForward(msg.sender, _evmScript), ERROR_CAN_NOT_FORWARD);
+        bytes memory input = new bytes(0); // TODO: Consider input for this
+
+        address[] memory blacklist = new address[](1);
+        blacklist[0] = address(this);
+
+        runScript(_evmScript, input, blacklist);
+    }
+
+    function isForwarder() public pure returns (bool) {
+        return true;
+    }
+
+    function canForward(address _sender, bytes _evmCallScript) public view returns (bool) {
+        return hasInitialized() && canPerform(_sender, MANAGER_ROLE, arr());
     }
 
 }
