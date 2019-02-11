@@ -1,7 +1,10 @@
+# aragon-cli
+**/**/artifact.json
+
 # Dependencies
 node_modules
+**/*/node_modules
 
-# Build dirs
-.cache/
-build/
-dist/
+# Ignore lock files
+package-lock.json
+yarn.lock
