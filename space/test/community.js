@@ -1,7 +1,21 @@
-const CommunityContract = artifacts.require("Community");
+const Space = artifacts.require("Community");
 
-contract('Community', (accounts) => {
-  var communityInstance;
+const DAOFactory = artifacts.require('@aragon/os/contracts/factory/DAOFactory');
+const EVMScriptRegistryFactory = artifacts.require('@aragon/os/contracts/factory/EVMScriptRegistryFactory');
+const ACL = artifacts.require('@aragon/os/contracts/acl/ACL');
+const Kernel = artifacts.require('@aragon/os/contracts/kernel/Kernel');
+
+const { assertRevert } = require('@aragon/test-helpers/assertThrow');
+const getBlockNumber = require('@aragon/test-helpers/blockNumber')(web3);
+const timeTravel = require('@aragon/test-helpers/timeTravel')(web3);
+
+contract('Space App', (accounts) => {
+  let spaceBase, daoFact, space;
+
+  let APP_MANAGER_ROLE;
+  let MANAGER_ROLE, MINT_ROLE;
+
+  const root = accounts[0];
 
   let coinsenceDeployer;
   let member1;
@@ -11,31 +25,41 @@ contract('Community', (accounts) => {
   let member5;
 
   before(async() => {
-    coinsenceDeployer = accounts[1];
-    member1 = accounts[2];
-    member2 = accounts[3];
-    member3 = accounts[4];
-    member4 = accounts[5];
-    member5 = accounts[6];
+    const kernelBase = await getContract('Kernel').new(true);
+    const aclBase = await getContract('ACL').new();
+    const regFact = await EVMScriptRegistryFactory.new();
+    daoFact = await DAOFactory.new(kernelBase.address, aclBase.address, regFact.address);
+    spaceBase = await Space.new();
 
-    communityInstance = await CommunityContract.new({from: coinsenceDeployer});
+    // Setup constants
+    APP_MANAGER_ROLE = await kernelBase.APP_MANAGER_ROLE();
+    MANAGER_ROLE = await votingBase.CREATE_VOTES_ROLE();
+    MINT_ROLE = await votingBase.MODIFY_SUPPORT_ROLE();
   });
 
-  it("create new space", async() => {
-    let name = "coinsence";
-    let desc = "freedom4people";
-    let owner = member1;
-    let members = [member2,member3, member4];
-
-    //create new space
-    await communityInstance.createSpace(name, desc, owner, members, {from: owner});
+  describe("common tests", () => {
     
-    let spaceNumber = await communityInstance.spacesCount();
-    //check spaces number
-    assert.equal(spaceNumber.toNumber(), 1);
-    //check spaces related to that owner
-    let count = await communityInstance.getMemberSpacesCount(owner);
-    assert.equal(count.toNumber(), 1);
+    beforeEach(async () => {
+      await space.initialize(daoFact.address, "coinsence", []);
+    });
+
+    it('fails on reinitialization', async () => {
+      return assertRevert(async () => {
+        await space.initialize(daoFact.address, "coinsence", []);
+      })
+    })
+
+    it('cannot initialize base app', async () => {
+      const newVoting = await Voting.new()
+      assert.isTrue(await newVoting.isPetrified())
+      return assertRevert(async () => {
+        await space.initialize(daoFact.address, "coinsence", []);
+      })
+    })
+
+    it('checks it is forwarder', async () => {
+        assert.isTrue(await space.isForwarder())
+    })
   });
 
 });

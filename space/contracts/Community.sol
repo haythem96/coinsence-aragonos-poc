@@ -1,11 +1,11 @@
 pragma solidity ^0.4.24;
 
-import "@aragon/os/contracts/apps/AragonApp.sol";
-import "@aragon/os/contracts/common/IForwarder.sol";
-import "@aragon/os/contracts/factory/DAOFactory.sol";
-//import "@aragon/os/contracts/apm/APMNamehash.sol";
+import "../node_modules/@aragon/os/contracts/apps/AragonApp.sol";
+import "../node_modules/@aragon/os/contracts/common/IForwarder.sol";
+import "../node_modules/@aragon/os/contracts/factory/DAOFactory.sol";
+//import "../node_modules/@aragon/os/contracts/apm/APMNamehash.sol";
 
-import "@aragon/os/contracts/lib/math/SafeMath.sol";
+import "../node_modules/@aragon/os/contracts/lib/math/SafeMath.sol";
 
 
 contract Community is IForwarder, AragonApp {
