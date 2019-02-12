@@ -67,8 +67,12 @@ module.exports = {
   },
 
   compilers: {
+    optimizer: {
+      enabled: true,
+      runs: 10000
+    },
     solc: {
-      version: "^0.4.24"  // ex:  "0.4.20". (Default: Truffle's installed solc)
+      version: "0.4.24"  // ex:  "0.4.20". (Default: Truffle's installed solc)
     }
- }
+  }
 }

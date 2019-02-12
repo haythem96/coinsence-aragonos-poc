@@ -65,10 +65,8 @@ contract Community is IForwarder, AragonApp {
     }
 
     /**
-     * @notice function to be called by member to create new space
-     * @param _name string space name
-     * @param _desc string space description
-     * @param _members Array of members addresses
+     * @notice function to get space members number
+     * @return members number
      */
     function getMembersCount() public view returns (uint256) {
         return _members.length;
@@ -76,7 +74,7 @@ contract Community is IForwarder, AragonApp {
 
     /**
      * @notice function to verify addresses
-     * @param _members list of addresses
+     * @param members list of addresses
      * @return true if all addresses are valid, otherwise return false
      */
     function verifyMembers(address[] members) internal pure returns(bool) {
