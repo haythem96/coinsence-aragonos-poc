@@ -2,18 +2,17 @@ pragma solidity ^0.4.24;
 
 
 import "./KitBase.sol";
-import "../node_modules/@aragon/os/contracts/common/IForwarder.sol";
+import "@aragon/os/contracts/apps/AragonApp.sol";
+import "@aragon/os/contracts/common/IForwarder.sol";
 import "@aragon/os/contracts/kernel/Kernel.sol";
 import "@aragon/os/contracts/acl/ACL.sol";
 
-import "../node_modules/@aragon/os/contracts/apps/AragonApp.sol";
 //import "../node_modules/@aragon/os/contracts/factory/DAOFactory.sol";
-//import "../node_modules/@aragon/os/contracts/apm/APMNamehash.sol";
 
-import "../node_modules/@aragon/os/contracts/lib/math/SafeMath.sol";
+import "@aragon/os/contracts/lib/math/SafeMath.sol";
 
 
-contract Community is AragonApp, IForwarder, KitBase {
+contract Community is IForwarder, KitBase, AragonApp {
 
     bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
     bytes32 public constant MINT_ROLE = keccak256("MINT_ROLE");
@@ -70,14 +69,14 @@ contract Community is AragonApp, IForwarder, KitBase {
     /**
      * @return the name of the space.
      */
-    function name() public view returns (string memory) {
+    function name() public view returns (string memory) isInitialized {
         return _name;
     }
 
     /**
      * @return the owner of the space
      */
-    function owner() public view returns (address) {
+    function owner() public view returns (address) isInitialized {
         return _owner;
     }
 
@@ -86,7 +85,7 @@ contract Community is AragonApp, IForwarder, KitBase {
      * @param position member index in the members array
      * @return address member
      */
-    function getMemberAddress(uint256 position) public view returns (address) {
+    function getMemberAddress(uint256 position) public view returns (address) isInitialized {
         require(position < _members.length, "member not found");
 
         return _members[position];
@@ -96,7 +95,7 @@ contract Community is AragonApp, IForwarder, KitBase {
      * @notice function to get space members number
      * @return members number
      */
-    function getMembersCount() public view returns (uint256) {
+    function getMembersCount() public view returns (uint256) isInitialized {
         return _members.length;
     }
 
