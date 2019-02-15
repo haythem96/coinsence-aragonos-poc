@@ -1,21 +1,24 @@
 pragma solidity ^0.4.24;
 
-import "../node_modules/@aragon/os/contracts/apps/AragonApp.sol";
+
+import "./KitBase.sol";
 import "../node_modules/@aragon/os/contracts/common/IForwarder.sol";
-import "../node_modules/@aragon/os/contracts/factory/DAOFactory.sol";
+import "@aragon/os/contracts/kernel/Kernel.sol";
+import "@aragon/os/contracts/acl/ACL.sol";
+
+import "../node_modules/@aragon/os/contracts/apps/AragonApp.sol";
+//import "../node_modules/@aragon/os/contracts/factory/DAOFactory.sol";
 //import "../node_modules/@aragon/os/contracts/apm/APMNamehash.sol";
 
 import "../node_modules/@aragon/os/contracts/lib/math/SafeMath.sol";
 
 
-contract Community is IForwarder, AragonApp {
+contract Community is AragonApp, IForwarder, KitBase {
 
     bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
     bytes32 public constant MINT_ROLE = keccak256("MINT_ROLE");
 
     string private constant ERROR_CAN_NOT_FORWARD = "TM_CAN_NOT_FORWARD";
-
-    DAOFactory public fac;
 
     ///@notice space name 
     string private _name;
@@ -26,20 +29,42 @@ contract Community is IForwarder, AragonApp {
     ///@notice space members
     address[] private _members;
 
-    function initialize(DAOFactory daoFactory, string name, address[] members) public onlyInit {
+    function initialize(string name, address[] members) public onlyInit {
         require(verifyMembers(members), "invalid member address");
-
-        Kernel dao = daoFactory.newDAO(this);
-        ACL acl = ACL(dao.acl());
-        acl.createPermission(this, dao, dao.APP_MANAGER_ROLE(), this);
 
         _name = name;
         _owner = msg.sender;
         _members = members;
 
-        acl.createPermission(_owner, this, MANAGER_ROLE, this);
-
         initialized();
+    }
+
+    function newInstance(
+        bytes32 appId, 
+        bytes32[] roles, 
+        address authorizedAddress, 
+        bytes initializeCalldata
+    ) public returns (Kernel dao, ERCProxy proxy) {
+        address root = msg.sender;
+        dao = fac.newDAO(this);
+        ACL acl = ACL(dao.acl());
+
+        acl.createPermission(this, dao, dao.APP_MANAGER_ROLE(), this);
+
+        // If there is no appId, an empty DAO will be created
+        if (appId != bytes32(0)) {
+            proxy = dao.newAppInstance(appId, latestVersionAppBase(appId), initializeCalldata, false);
+
+            for (uint256 i = 0; i < roles.length; i++) {
+                acl.createPermission(authorizedAddress, proxy, roles[i], root);
+            }
+
+            emit InstalledApp(proxy, appId);
+        }
+
+        cleanupDAOPermissions(dao, acl, root);
+
+        emit DeployInstance(dao);
     }
 
     /**
@@ -57,6 +82,9 @@ contract Community is IForwarder, AragonApp {
     }
 
     /**
+     * @notice function to get member address from members array
+     * @param position member index in the members array
+     * @return address member
      */
     function getMemberAddress(uint256 position) public view returns (address) {
         require(position < _members.length, "member not found");
@@ -86,11 +114,11 @@ contract Community is IForwarder, AragonApp {
         return true;
     }
 
-     /**
-    * @notice Execute desired action as a token holder
-    * @dev IForwarder interface conformance. Forwards any token holder action.
-    * @param _evmScript Script being executed
-    */
+    /**
+     * @notice Execute desired action as a token holder
+     * @dev IForwarder interface conformance. Forwards any token holder action.
+     * @param _evmScript Script being executed
+     */
     function forward(bytes _evmScript) public {
         require(canForward(msg.sender, _evmScript), ERROR_CAN_NOT_FORWARD);
         bytes memory input = new bytes(0); // TODO: Consider input for this
