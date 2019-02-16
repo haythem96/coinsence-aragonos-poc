@@ -3,16 +3,15 @@ pragma solidity ^0.4.24;
 
 import "./KitBase.sol";
 import "@aragon/os/contracts/apps/AragonApp.sol";
-import "@aragon/os/contracts/common/IForwarder.sol";
 import "@aragon/os/contracts/kernel/Kernel.sol";
 import "@aragon/os/contracts/acl/ACL.sol";
 
-//import "../node_modules/@aragon/os/contracts/factory/DAOFactory.sol";
+import "@aragon/os/contracts/common/IForwarder.sol";
 
 import "@aragon/os/contracts/lib/math/SafeMath.sol";
 
 
-contract Community is IForwarder, KitBase, AragonApp {
+contract Community is KitBase, IForwarder, AragonApp {
 
     bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
     bytes32 public constant MINT_ROLE = keccak256("MINT_ROLE");
@@ -28,13 +27,20 @@ contract Community is IForwarder, KitBase, AragonApp {
     ///@notice space members
     address[] private _members;
 
-    function initialize(string name, address[] members) public onlyInit {
+    constructor(
+        DAOFactory _fac,
+        ENS _ens,
+        string name,
+        address[] members
+    ) KitBase(_fac, _ens) public {
         require(verifyMembers(members), "invalid member address");
 
         _name = name;
         _owner = msg.sender;
         _members = members;
+    }
 
+    function initialize() public onlyInit {
         initialized();
     }
 
