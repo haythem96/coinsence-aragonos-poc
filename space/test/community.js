@@ -1,13 +1,16 @@
-const Space = artifacts.require("Community");
-
+const Space = artifacts.require("Community.sol");
 const DAOFactory = artifacts.require('@aragon/os/contracts/factory/DAOFactory');
 const EVMScriptRegistryFactory = artifacts.require('@aragon/os/contracts/factory/EVMScriptRegistryFactory');
 const ACL = artifacts.require('@aragon/os/contracts/acl/ACL');
 const Kernel = artifacts.require('@aragon/os/contracts/kernel/Kernel');
 
+const namehash = require('eth-ens-namehash').hash
+
 const { assertRevert } = require('@aragon/test-helpers/assertThrow');
 const getBlockNumber = require('@aragon/test-helpers/blockNumber')(web3);
 const timeTravel = require('@aragon/test-helpers/timeTravel')(web3);
+
+const getContract = name => artifacts.require(name);
 
 contract('Space App', (accounts) => {
   let spaceBase, daoFact, space;
@@ -25,41 +28,29 @@ contract('Space App', (accounts) => {
   let member5;
 
   before(async() => {
+
     const kernelBase = await getContract('Kernel').new(true);
     const aclBase = await getContract('ACL').new();
     const regFact = await EVMScriptRegistryFactory.new();
-    daoFact = await DAOFactory.new(kernelBase.address, aclBase.address, regFact.address);
-    spaceBase = await Space.new();
-
-    // Setup constants
-    APP_MANAGER_ROLE = await kernelBase.APP_MANAGER_ROLE();
-    MANAGER_ROLE = await votingBase.CREATE_VOTES_ROLE();
-    MINT_ROLE = await votingBase.MODIFY_SUPPORT_ROLE();
+    daoFact = await DAOFactory.new(kernelBase.address, aclBase.address, regFact.address);    
   });
 
   describe("common tests", () => {
     
     beforeEach(async () => {
-      await space.initialize(daoFact.address, "coinsence", []);
+      spaceBase = await Space.new(daoFact.address, namehash('coinsence-aragon.aragonpm.eth'), "coinsence", []);
     });
 
     it('fails on reinitialization', async () => {
       return assertRevert(async () => {
-        await space.initialize(daoFact.address, "coinsence", []);
+        await spaceBase.initialize();
       })
     })
 
-    it('cannot initialize base app', async () => {
-      const newVoting = await Voting.new()
-      assert.isTrue(await newVoting.isPetrified())
-      return assertRevert(async () => {
-        await space.initialize(daoFact.address, "coinsence", []);
-      })
-    })
-
-    it('checks it is forwarder', async () => {
+    /*it('checks it is forwarder', async () => {
         assert.isTrue(await space.isForwarder())
-    })
+    })*/
+
   });
 
 });
