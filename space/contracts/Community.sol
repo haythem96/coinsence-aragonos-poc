@@ -69,14 +69,14 @@ contract Community is IForwarder, KitBase, AragonApp {
     /**
      * @return the name of the space.
      */
-    function name() public view returns (string memory) isInitialized {
+    function name() public view isInitialized returns (string memory) {
         return _name;
     }
 
     /**
      * @return the owner of the space
      */
-    function owner() public view returns (address) isInitialized {
+    function owner() public view isInitialized returns (address) {
         return _owner;
     }
 
@@ -85,7 +85,7 @@ contract Community is IForwarder, KitBase, AragonApp {
      * @param position member index in the members array
      * @return address member
      */
-    function getMemberAddress(uint256 position) public view returns (address) isInitialized {
+    function getMemberAddress(uint256 position) public view isInitialized returns (address) {
         require(position < _members.length, "member not found");
 
         return _members[position];
@@ -95,7 +95,7 @@ contract Community is IForwarder, KitBase, AragonApp {
      * @notice function to get space members number
      * @return members number
      */
-    function getMembersCount() public view returns (uint256) isInitialized {
+    function getMembersCount() public view isInitialized returns (uint256) {
         return _members.length;
     }
 
