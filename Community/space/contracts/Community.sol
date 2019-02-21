@@ -14,7 +14,7 @@ import "@aragon/os/contracts/lib/math/SafeMath.sol";
 contract Community is IForwarder, AragonApp {
 
     bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
-    bytes32 public constant MINT_ROLE = keccak256("MINT_ROLE");
+    bytes32 public constant ISSUE_TOKEN_ROLE = keccak256("ISSUE_TOKEN_ROLE");
 
     string private constant ERROR_CAN_NOT_FORWARD = "TM_CAN_NOT_FORWARD";
 
@@ -25,22 +25,7 @@ contract Community is IForwarder, AragonApp {
     address private _owner;
 
     ///@notice space members
-    address[] private _members;
-
-    /*
-    constructor(
-        DAOFactory _fac,
-        ENS _ens,
-        string name,
-        address[] members
-    ) KitBase(_fac, _ens) public {
-        require(verifyMembers(members), "invalid member address");
-
-        _name = name;
-        _owner = msg.sender;
-        _members = members;
-    }
-    */
+    address[] public _members;
 
     function initialize(string name, address[] members) public onlyInit {
         require(verifyMembers(members), "invalid member address");
@@ -51,36 +36,6 @@ contract Community is IForwarder, AragonApp {
 
         initialized();
     }
-
-    /*
-    function newInstance(
-        bytes32 appId, 
-        bytes32[] roles, 
-        address authorizedAddress, 
-        bytes initializeCalldata
-    ) public returns (Kernel dao, ERCProxy proxy) {
-        address root = msg.sender;
-        dao = fac.newDAO(this);
-        ACL acl = ACL(dao.acl());
-
-        acl.createPermission(this, dao, dao.APP_MANAGER_ROLE(), this);
-
-        // If there is no appId, an empty DAO will be created
-        if (appId != bytes32(0)) {
-            proxy = dao.newAppInstance(appId, latestVersionAppBase(appId), initializeCalldata, false);
-
-            for (uint256 i = 0; i < roles.length; i++) {
-                acl.createPermission(authorizedAddress, proxy, roles[i], root);
-            }
-
-            emit InstalledApp(proxy, appId);
-        }
-
-        cleanupDAOPermissions(dao, acl, root);
-
-        emit DeployInstance(dao);
-    }
-    */
 
     /**
      * @return the name of the space.
@@ -127,6 +82,30 @@ contract Community is IForwarder, AragonApp {
             }
         }
         return true;
+    }
+
+    /**
+     * @notice function to check if member address already exist in the space
+     * @param member address
+     */
+    function doesExist(address member) internal view returns(bool) {
+        for(uint i = 0; i < _members.length; i++) {
+            if(_members[i] == member) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @notice function to add member to a space
+     * @param member address
+     */
+    function addMember(address member) public auth(MANAGER_ROLE) {
+        require(member != address(0), "invalid member address");
+        require(!doesExist(member), "member already exist in the space");
+
+        _members.push(member);
     }
 
     /**
