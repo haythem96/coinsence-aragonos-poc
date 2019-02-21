@@ -103,6 +103,7 @@ contract Community is IForwarder, AragonApp {
      */
     function addMember(address member) public auth(MANAGER_ROLE) {
         require(member != address(0), "invalid member address");
+        require(member != msg.sender, "you can't add urself!");
         require(!doesExist(member), "member already exist in the space");
 
         _members.push(member);
