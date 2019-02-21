@@ -1,27 +1,27 @@
 {
   "contractName": "EVMScriptRegistryConstants",
   "abi": [],
-  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a723058209f2d5cee33b9004b7b497bfa30f9405987d748bd5fbba4f4a8f552c946a59cb30029",
-  "deployedBytecode": "0x6080604052600080fd00a165627a7a723058209f2d5cee33b9004b7b497bfa30f9405987d748bd5fbba4f4a8f552c946a59cb30029",
-  "sourceMap": "107:292:28:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;107:292:28;;;;;;;",
-  "deployedSourceMap": "107:292:28:-;;;;;",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a7230582028e97642bd4fb074d985f0328713f68c478f0b41b711c4f0281c8797c63cbb9a0029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a7230582028e97642bd4fb074d985f0328713f68c478f0b41b711c4f0281c8797c63cbb9a0029",
+  "sourceMap": "107:292:31:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;107:292:31;;;;;;;",
+  "deployedSourceMap": "107:292:31:-;;;;;",
   "source": "/*\n * SPDX-License-Identitifer:    MIT\n */\n\npragma solidity ^0.4.24;\n\nimport \"./IEVMScriptExecutor.sol\";\n\n\ncontract EVMScriptRegistryConstants {\n    /* Hardcoded constants to save gas\n    bytes32 internal constant EVMSCRIPT_REGISTRY_APP_ID = apmNamehash(\"evmreg\");\n    */\n    bytes32 internal constant EVMSCRIPT_REGISTRY_APP_ID = 0xddbcfd564f642ab5627cf68b9b7d374fb4f8a36e941a75d89c87998cef03bd61;\n}\n\n\ninterface IEVMScriptRegistry {\n    function addScriptExecutor(IEVMScriptExecutor executor) external returns (uint id);\n    function disableScriptExecutor(uint256 executorId) external;\n\n    // TODO: this should be external\n    // See https://github.com/ethereum/solidity/issues/4832\n    function getScriptExecutor(bytes script) public view returns (IEVMScriptExecutor);\n}\n",
-  "sourcePath": "/home/haythem96/Projects/Blockchain/Projects/Coinsence/coinsence-aragon/space/node_modules/@aragon/os/contracts/evmscript/IEVMScriptRegistry.sol",
+  "sourcePath": "@aragon/os/contracts/evmscript/IEVMScriptRegistry.sol",
   "ast": {
-    "absolutePath": "/home/haythem96/Projects/Blockchain/Projects/Coinsence/coinsence-aragon/space/node_modules/@aragon/os/contracts/evmscript/IEVMScriptRegistry.sol",
+    "absolutePath": "@aragon/os/contracts/evmscript/IEVMScriptRegistry.sol",
     "exportedSymbols": {
       "EVMScriptRegistryConstants": [
-        3562
+        4175
       ],
       "IEVMScriptRegistry": [
-        3582
+        4195
       ]
     },
-    "id": 3583,
+    "id": 4196,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3557,
+        "id": 4170,
         "literals": [
           "solidity",
           "^",
@@ -29,16 +29,16 @@
           ".24"
         ],
         "nodeType": "PragmaDirective",
-        "src": "44:24:28"
+        "src": "44:24:31"
       },
       {
-        "absolutePath": "/home/haythem96/Projects/Blockchain/Projects/Coinsence/coinsence-aragon/space/node_modules/@aragon/os/contracts/evmscript/IEVMScriptExecutor.sol",
+        "absolutePath": "@aragon/os/contracts/evmscript/IEVMScriptExecutor.sol",
         "file": "./IEVMScriptExecutor.sol",
-        "id": 3558,
+        "id": 4171,
         "nodeType": "ImportDirective",
-        "scope": 3583,
-        "sourceUnit": 3556,
-        "src": "70:34:28",
+        "scope": 4196,
+        "sourceUnit": 4169,
+        "src": "70:34:31",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -48,20 +48,20 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3562,
+        "id": 4175,
         "linearizedBaseContracts": [
-          3562
+          4175
         ],
         "name": "EVMScriptRegistryConstants",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 3561,
+            "id": 4174,
             "name": "EVMSCRIPT_REGISTRY_APP_ID",
             "nodeType": "VariableDeclaration",
-            "scope": 3562,
-            "src": "276:120:28",
+            "scope": 4175,
+            "src": "276:120:31",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -69,10 +69,10 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 3559,
+              "id": 4172,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
-              "src": "276:7:28",
+              "src": "276:7:31",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes32",
                 "typeString": "bytes32"
@@ -81,14 +81,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "307864646263666435363466363432616235363237636636386239623764333734666234663861333665393431613735643839633837393938636566303362643631",
-              "id": 3560,
+              "id": 4173,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "330:66:28",
+              "src": "330:66:31",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_100295055253822236757776785641620620126240610315818972729696126418245724126561_by_1",
@@ -99,8 +99,8 @@
             "visibility": "internal"
           }
         ],
-        "scope": 3583,
-        "src": "107:292:28"
+        "scope": 4196,
+        "src": "107:292:31"
       },
       {
         "baseContracts": [],
@@ -108,9 +108,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 3582,
+        "id": 4195,
         "linearizedBaseContracts": [
-          3582
+          4195
         ],
         "name": "IEVMScriptRegistry",
         "nodeType": "ContractDefinition",
@@ -118,7 +118,7 @@
           {
             "body": null,
             "documentation": null,
-            "id": 3569,
+            "id": 4182,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -126,31 +126,31 @@
             "name": "addScriptExecutor",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3565,
+              "id": 4178,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3564,
+                  "id": 4177,
                   "name": "executor",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3569,
-                  "src": "464:27:28",
+                  "scope": 4182,
+                  "src": "464:27:31",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IEVMScriptExecutor_$3555",
+                    "typeIdentifier": "t_contract$_IEVMScriptExecutor_$4168",
                     "typeString": "contract IEVMScriptExecutor"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 3563,
+                    "id": 4176,
                     "name": "IEVMScriptExecutor",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 3555,
-                    "src": "464:18:28",
+                    "referencedDeclaration": 4168,
+                    "src": "464:18:31",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IEVMScriptExecutor_$3555",
+                      "typeIdentifier": "t_contract$_IEVMScriptExecutor_$4168",
                       "typeString": "contract IEVMScriptExecutor"
                     }
                   },
@@ -158,20 +158,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "463:29:28"
+              "src": "463:29:31"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3568,
+              "id": 4181,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3567,
+                  "id": 4180,
                   "name": "id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3569,
-                  "src": "511:7:28",
+                  "scope": 4182,
+                  "src": "511:7:31",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -179,10 +179,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3566,
+                    "id": 4179,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "511:4:28",
+                    "src": "511:4:31",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -192,10 +192,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "510:9:28"
+              "src": "510:9:31"
             },
-            "scope": 3582,
-            "src": "437:83:28",
+            "scope": 4195,
+            "src": "437:83:31",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -203,7 +203,7 @@
           {
             "body": null,
             "documentation": null,
-            "id": 3574,
+            "id": 4187,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -211,16 +211,16 @@
             "name": "disableScriptExecutor",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3572,
+              "id": 4185,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3571,
+                  "id": 4184,
                   "name": "executorId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3574,
-                  "src": "556:18:28",
+                  "scope": 4187,
+                  "src": "556:18:31",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -228,10 +228,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3570,
+                    "id": 4183,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "556:7:28",
+                    "src": "556:7:31",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -241,17 +241,17 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "555:20:28"
+              "src": "555:20:31"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3573,
+              "id": 4186,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "584:0:28"
+              "src": "584:0:31"
             },
-            "scope": 3582,
-            "src": "525:60:28",
+            "scope": 4195,
+            "src": "525:60:31",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -259,7 +259,7 @@
           {
             "body": null,
             "documentation": null,
-            "id": 3581,
+            "id": 4194,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -267,16 +267,16 @@
             "name": "getScriptExecutor",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3577,
+              "id": 4190,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3576,
+                  "id": 4189,
                   "name": "script",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3581,
-                  "src": "715:12:28",
+                  "scope": 4194,
+                  "src": "715:12:31",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -284,10 +284,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 3575,
+                    "id": 4188,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "715:5:28",
+                    "src": "715:5:31",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -297,35 +297,35 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "714:14:28"
+              "src": "714:14:31"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3580,
+              "id": 4193,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3579,
+                  "id": 4192,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3581,
-                  "src": "750:18:28",
+                  "scope": 4194,
+                  "src": "750:18:31",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IEVMScriptExecutor_$3555",
+                    "typeIdentifier": "t_contract$_IEVMScriptExecutor_$4168",
                     "typeString": "contract IEVMScriptExecutor"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 3578,
+                    "id": 4191,
                     "name": "IEVMScriptExecutor",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 3555,
-                    "src": "750:18:28",
+                    "referencedDeclaration": 4168,
+                    "src": "750:18:31",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IEVMScriptExecutor_$3555",
+                      "typeIdentifier": "t_contract$_IEVMScriptExecutor_$4168",
                       "typeString": "contract IEVMScriptExecutor"
                     }
                   },
@@ -333,36 +333,36 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "749:20:28"
+              "src": "749:20:31"
             },
-            "scope": 3582,
-            "src": "688:82:28",
+            "scope": 4195,
+            "src": "688:82:31",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3583,
-        "src": "402:370:28"
+        "scope": 4196,
+        "src": "402:370:31"
       }
     ],
-    "src": "44:729:28"
+    "src": "44:729:31"
   },
   "legacyAST": {
-    "absolutePath": "/home/haythem96/Projects/Blockchain/Projects/Coinsence/coinsence-aragon/space/node_modules/@aragon/os/contracts/evmscript/IEVMScriptRegistry.sol",
+    "absolutePath": "@aragon/os/contracts/evmscript/IEVMScriptRegistry.sol",
     "exportedSymbols": {
       "EVMScriptRegistryConstants": [
-        3562
+        4175
       ],
       "IEVMScriptRegistry": [
-        3582
+        4195
       ]
     },
-    "id": 3583,
+    "id": 4196,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3557,
+        "id": 4170,
         "literals": [
           "solidity",
           "^",
@@ -370,16 +370,16 @@
           ".24"
         ],
         "nodeType": "PragmaDirective",
-        "src": "44:24:28"
+        "src": "44:24:31"
       },
       {
-        "absolutePath": "/home/haythem96/Projects/Blockchain/Projects/Coinsence/coinsence-aragon/space/node_modules/@aragon/os/contracts/evmscript/IEVMScriptExecutor.sol",
+        "absolutePath": "@aragon/os/contracts/evmscript/IEVMScriptExecutor.sol",
         "file": "./IEVMScriptExecutor.sol",
-        "id": 3558,
+        "id": 4171,
         "nodeType": "ImportDirective",
-        "scope": 3583,
-        "sourceUnit": 3556,
-        "src": "70:34:28",
+        "scope": 4196,
+        "sourceUnit": 4169,
+        "src": "70:34:31",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -389,20 +389,20 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3562,
+        "id": 4175,
         "linearizedBaseContracts": [
-          3562
+          4175
         ],
         "name": "EVMScriptRegistryConstants",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 3561,
+            "id": 4174,
             "name": "EVMSCRIPT_REGISTRY_APP_ID",
             "nodeType": "VariableDeclaration",
-            "scope": 3562,
-            "src": "276:120:28",
+            "scope": 4175,
+            "src": "276:120:31",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -410,10 +410,10 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 3559,
+              "id": 4172,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
-              "src": "276:7:28",
+              "src": "276:7:31",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes32",
                 "typeString": "bytes32"
@@ -422,14 +422,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "307864646263666435363466363432616235363237636636386239623764333734666234663861333665393431613735643839633837393938636566303362643631",
-              "id": 3560,
+              "id": 4173,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "330:66:28",
+              "src": "330:66:31",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_100295055253822236757776785641620620126240610315818972729696126418245724126561_by_1",
@@ -440,8 +440,8 @@
             "visibility": "internal"
           }
         ],
-        "scope": 3583,
-        "src": "107:292:28"
+        "scope": 4196,
+        "src": "107:292:31"
       },
       {
         "baseContracts": [],
@@ -449,9 +449,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 3582,
+        "id": 4195,
         "linearizedBaseContracts": [
-          3582
+          4195
         ],
         "name": "IEVMScriptRegistry",
         "nodeType": "ContractDefinition",
@@ -459,7 +459,7 @@
           {
             "body": null,
             "documentation": null,
-            "id": 3569,
+            "id": 4182,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -467,31 +467,31 @@
             "name": "addScriptExecutor",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3565,
+              "id": 4178,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3564,
+                  "id": 4177,
                   "name": "executor",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3569,
-                  "src": "464:27:28",
+                  "scope": 4182,
+                  "src": "464:27:31",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IEVMScriptExecutor_$3555",
+                    "typeIdentifier": "t_contract$_IEVMScriptExecutor_$4168",
                     "typeString": "contract IEVMScriptExecutor"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 3563,
+                    "id": 4176,
                     "name": "IEVMScriptExecutor",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 3555,
-                    "src": "464:18:28",
+                    "referencedDeclaration": 4168,
+                    "src": "464:18:31",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IEVMScriptExecutor_$3555",
+                      "typeIdentifier": "t_contract$_IEVMScriptExecutor_$4168",
                       "typeString": "contract IEVMScriptExecutor"
                     }
                   },
@@ -499,20 +499,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "463:29:28"
+              "src": "463:29:31"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3568,
+              "id": 4181,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3567,
+                  "id": 4180,
                   "name": "id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3569,
-                  "src": "511:7:28",
+                  "scope": 4182,
+                  "src": "511:7:31",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -520,10 +520,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3566,
+                    "id": 4179,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "511:4:28",
+                    "src": "511:4:31",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -533,10 +533,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "510:9:28"
+              "src": "510:9:31"
             },
-            "scope": 3582,
-            "src": "437:83:28",
+            "scope": 4195,
+            "src": "437:83:31",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -544,7 +544,7 @@
           {
             "body": null,
             "documentation": null,
-            "id": 3574,
+            "id": 4187,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -552,16 +552,16 @@
             "name": "disableScriptExecutor",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3572,
+              "id": 4185,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3571,
+                  "id": 4184,
                   "name": "executorId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3574,
-                  "src": "556:18:28",
+                  "scope": 4187,
+                  "src": "556:18:31",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -569,10 +569,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3570,
+                    "id": 4183,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "556:7:28",
+                    "src": "556:7:31",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -582,17 +582,17 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "555:20:28"
+              "src": "555:20:31"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3573,
+              "id": 4186,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "584:0:28"
+              "src": "584:0:31"
             },
-            "scope": 3582,
-            "src": "525:60:28",
+            "scope": 4195,
+            "src": "525:60:31",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
@@ -600,7 +600,7 @@
           {
             "body": null,
             "documentation": null,
-            "id": 3581,
+            "id": 4194,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -608,16 +608,16 @@
             "name": "getScriptExecutor",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3577,
+              "id": 4190,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3576,
+                  "id": 4189,
                   "name": "script",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3581,
-                  "src": "715:12:28",
+                  "scope": 4194,
+                  "src": "715:12:31",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -625,10 +625,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 3575,
+                    "id": 4188,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "715:5:28",
+                    "src": "715:5:31",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -638,35 +638,35 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "714:14:28"
+              "src": "714:14:31"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3580,
+              "id": 4193,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3579,
+                  "id": 4192,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3581,
-                  "src": "750:18:28",
+                  "scope": 4194,
+                  "src": "750:18:31",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IEVMScriptExecutor_$3555",
+                    "typeIdentifier": "t_contract$_IEVMScriptExecutor_$4168",
                     "typeString": "contract IEVMScriptExecutor"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 3578,
+                    "id": 4191,
                     "name": "IEVMScriptExecutor",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 3555,
-                    "src": "750:18:28",
+                    "referencedDeclaration": 4168,
+                    "src": "750:18:31",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IEVMScriptExecutor_$3555",
+                      "typeIdentifier": "t_contract$_IEVMScriptExecutor_$4168",
                       "typeString": "contract IEVMScriptExecutor"
                     }
                   },
@@ -674,20 +674,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "749:20:28"
+              "src": "749:20:31"
             },
-            "scope": 3582,
-            "src": "688:82:28",
+            "scope": 4195,
+            "src": "688:82:31",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3583,
-        "src": "402:370:28"
+        "scope": 4196,
+        "src": "402:370:31"
       }
     ],
-    "src": "44:729:28"
+    "src": "44:729:31"
   },
   "compiler": {
     "name": "solc",
@@ -695,5 +695,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2019-02-12T11:11:02.333Z"
+  "updatedAt": "2019-02-21T09:49:07.479Z"
 }

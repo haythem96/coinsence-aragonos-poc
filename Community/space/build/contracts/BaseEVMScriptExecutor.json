@@ -90,19 +90,19 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "/*\n * SPDX-License-Identitifer:    MIT\n */\n\npragma solidity ^0.4.24;\n\nimport \"../../common/Autopetrified.sol\";\nimport \"../IEVMScriptExecutor.sol\";\n\n\ncontract BaseEVMScriptExecutor is IEVMScriptExecutor, Autopetrified {\n    uint256 internal constant SCRIPT_START_LOCATION = 4;\n}\n",
-  "sourcePath": "/home/haythem96/Projects/Blockchain/Projects/Coinsence/coinsence-aragon/space/node_modules/@aragon/os/contracts/evmscript/executors/BaseEVMScriptExecutor.sol",
+  "sourcePath": "@aragon/os/contracts/evmscript/executors/BaseEVMScriptExecutor.sol",
   "ast": {
-    "absolutePath": "/home/haythem96/Projects/Blockchain/Projects/Coinsence/coinsence-aragon/space/node_modules/@aragon/os/contracts/evmscript/executors/BaseEVMScriptExecutor.sol",
+    "absolutePath": "@aragon/os/contracts/evmscript/executors/BaseEVMScriptExecutor.sol",
     "exportedSymbols": {
       "BaseEVMScriptExecutor": [
-        3686
+        4299
       ]
     },
-    "id": 3687,
+    "id": 4300,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3676,
+        "id": 4289,
         "literals": [
           "solidity",
           "^",
@@ -110,27 +110,27 @@
           ".24"
         ],
         "nodeType": "PragmaDirective",
-        "src": "44:24:30"
+        "src": "44:24:33"
       },
       {
-        "absolutePath": "/home/haythem96/Projects/Blockchain/Projects/Coinsence/coinsence-aragon/space/node_modules/@aragon/os/contracts/common/Autopetrified.sol",
+        "absolutePath": "@aragon/os/contracts/common/Autopetrified.sol",
         "file": "../../common/Autopetrified.sol",
-        "id": 3677,
+        "id": 4290,
         "nodeType": "ImportDirective",
-        "scope": 3687,
-        "sourceUnit": 2548,
-        "src": "70:40:30",
+        "scope": 4300,
+        "sourceUnit": 3161,
+        "src": "70:40:33",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/haythem96/Projects/Blockchain/Projects/Coinsence/coinsence-aragon/space/node_modules/@aragon/os/contracts/evmscript/IEVMScriptExecutor.sol",
+        "absolutePath": "@aragon/os/contracts/evmscript/IEVMScriptExecutor.sol",
         "file": "../IEVMScriptExecutor.sol",
-        "id": 3678,
+        "id": 4291,
         "nodeType": "ImportDirective",
-        "scope": 3687,
-        "sourceUnit": 3556,
-        "src": "111:35:30",
+        "scope": 4300,
+        "sourceUnit": 4169,
+        "src": "111:35:33",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -140,68 +140,68 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 3679,
+              "id": 4292,
               "name": "IEVMScriptExecutor",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 3555,
-              "src": "183:18:30",
+              "referencedDeclaration": 4168,
+              "src": "183:18:33",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IEVMScriptExecutor_$3555",
+                "typeIdentifier": "t_contract$_IEVMScriptExecutor_$4168",
                 "typeString": "contract IEVMScriptExecutor"
               }
             },
-            "id": 3680,
+            "id": 4293,
             "nodeType": "InheritanceSpecifier",
-            "src": "183:18:30"
+            "src": "183:18:33"
           },
           {
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 3681,
+              "id": 4294,
               "name": "Autopetrified",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 2547,
-              "src": "203:13:30",
+              "referencedDeclaration": 3160,
+              "src": "203:13:33",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Autopetrified_$2547",
+                "typeIdentifier": "t_contract$_Autopetrified_$3160",
                 "typeString": "contract Autopetrified"
               }
             },
-            "id": 3682,
+            "id": 4295,
             "nodeType": "InheritanceSpecifier",
-            "src": "203:13:30"
+            "src": "203:13:33"
           }
         ],
         "contractDependencies": [
-          2547,
-          2820,
-          2881,
-          2928,
-          3555
+          3160,
+          3433,
+          3494,
+          3541,
+          4168
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 3686,
+        "id": 4299,
         "linearizedBaseContracts": [
-          3686,
-          2547,
-          2881,
-          2820,
-          2928,
-          3555
+          4299,
+          3160,
+          3494,
+          3433,
+          3541,
+          4168
         ],
         "name": "BaseEVMScriptExecutor",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 3685,
+            "id": 4298,
             "name": "SCRIPT_START_LOCATION",
             "nodeType": "VariableDeclaration",
-            "scope": 3686,
-            "src": "223:51:30",
+            "scope": 4299,
+            "src": "223:51:33",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -209,10 +209,10 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 3683,
+              "id": 4296,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "223:7:30",
+              "src": "223:7:33",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -221,14 +221,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "34",
-              "id": 3684,
+              "id": 4297,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "273:1:30",
+              "src": "273:1:33",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_4_by_1",
@@ -239,24 +239,24 @@
             "visibility": "internal"
           }
         ],
-        "scope": 3687,
-        "src": "149:128:30"
+        "scope": 4300,
+        "src": "149:128:33"
       }
     ],
-    "src": "44:234:30"
+    "src": "44:234:33"
   },
   "legacyAST": {
-    "absolutePath": "/home/haythem96/Projects/Blockchain/Projects/Coinsence/coinsence-aragon/space/node_modules/@aragon/os/contracts/evmscript/executors/BaseEVMScriptExecutor.sol",
+    "absolutePath": "@aragon/os/contracts/evmscript/executors/BaseEVMScriptExecutor.sol",
     "exportedSymbols": {
       "BaseEVMScriptExecutor": [
-        3686
+        4299
       ]
     },
-    "id": 3687,
+    "id": 4300,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3676,
+        "id": 4289,
         "literals": [
           "solidity",
           "^",
@@ -264,27 +264,27 @@
           ".24"
         ],
         "nodeType": "PragmaDirective",
-        "src": "44:24:30"
+        "src": "44:24:33"
       },
       {
-        "absolutePath": "/home/haythem96/Projects/Blockchain/Projects/Coinsence/coinsence-aragon/space/node_modules/@aragon/os/contracts/common/Autopetrified.sol",
+        "absolutePath": "@aragon/os/contracts/common/Autopetrified.sol",
         "file": "../../common/Autopetrified.sol",
-        "id": 3677,
+        "id": 4290,
         "nodeType": "ImportDirective",
-        "scope": 3687,
-        "sourceUnit": 2548,
-        "src": "70:40:30",
+        "scope": 4300,
+        "sourceUnit": 3161,
+        "src": "70:40:33",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/haythem96/Projects/Blockchain/Projects/Coinsence/coinsence-aragon/space/node_modules/@aragon/os/contracts/evmscript/IEVMScriptExecutor.sol",
+        "absolutePath": "@aragon/os/contracts/evmscript/IEVMScriptExecutor.sol",
         "file": "../IEVMScriptExecutor.sol",
-        "id": 3678,
+        "id": 4291,
         "nodeType": "ImportDirective",
-        "scope": 3687,
-        "sourceUnit": 3556,
-        "src": "111:35:30",
+        "scope": 4300,
+        "sourceUnit": 4169,
+        "src": "111:35:33",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -294,68 +294,68 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 3679,
+              "id": 4292,
               "name": "IEVMScriptExecutor",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 3555,
-              "src": "183:18:30",
+              "referencedDeclaration": 4168,
+              "src": "183:18:33",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IEVMScriptExecutor_$3555",
+                "typeIdentifier": "t_contract$_IEVMScriptExecutor_$4168",
                 "typeString": "contract IEVMScriptExecutor"
               }
             },
-            "id": 3680,
+            "id": 4293,
             "nodeType": "InheritanceSpecifier",
-            "src": "183:18:30"
+            "src": "183:18:33"
           },
           {
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 3681,
+              "id": 4294,
               "name": "Autopetrified",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 2547,
-              "src": "203:13:30",
+              "referencedDeclaration": 3160,
+              "src": "203:13:33",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Autopetrified_$2547",
+                "typeIdentifier": "t_contract$_Autopetrified_$3160",
                 "typeString": "contract Autopetrified"
               }
             },
-            "id": 3682,
+            "id": 4295,
             "nodeType": "InheritanceSpecifier",
-            "src": "203:13:30"
+            "src": "203:13:33"
           }
         ],
         "contractDependencies": [
-          2547,
-          2820,
-          2881,
-          2928,
-          3555
+          3160,
+          3433,
+          3494,
+          3541,
+          4168
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 3686,
+        "id": 4299,
         "linearizedBaseContracts": [
-          3686,
-          2547,
-          2881,
-          2820,
-          2928,
-          3555
+          4299,
+          3160,
+          3494,
+          3433,
+          3541,
+          4168
         ],
         "name": "BaseEVMScriptExecutor",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 3685,
+            "id": 4298,
             "name": "SCRIPT_START_LOCATION",
             "nodeType": "VariableDeclaration",
-            "scope": 3686,
-            "src": "223:51:30",
+            "scope": 4299,
+            "src": "223:51:33",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -363,10 +363,10 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 3683,
+              "id": 4296,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "223:7:30",
+              "src": "223:7:33",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -375,14 +375,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "34",
-              "id": 3684,
+              "id": 4297,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "273:1:30",
+              "src": "273:1:33",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_4_by_1",
@@ -393,11 +393,11 @@
             "visibility": "internal"
           }
         ],
-        "scope": 3687,
-        "src": "149:128:30"
+        "scope": 4300,
+        "src": "149:128:33"
       }
     ],
-    "src": "44:234:30"
+    "src": "44:234:33"
   },
   "compiler": {
     "name": "solc",
@@ -405,5 +405,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2019-02-12T11:11:02.334Z"
+  "updatedAt": "2019-02-21T09:49:07.473Z"
 }
