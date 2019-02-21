@@ -15,8 +15,8 @@ contract SpaceKit is KitBase {
     function newInstance(
         bytes32 appId, 
         bytes32[] roles, 
-        address authorizedAddress
-        //bytes initializeCalldata
+        address authorizedAddress,
+        bytes initializeCalldata
     ) public returns (Kernel dao, ERCProxy proxy) {
         address root = msg.sender;
         dao = fac.newDAO(this);
@@ -26,7 +26,7 @@ contract SpaceKit is KitBase {
 
         // If there is no appId, an empty DAO will be created
         if (appId != bytes32(0)) {
-            proxy = dao.newAppInstance(appId, latestVersionAppBase(appId));
+            proxy = dao.newAppInstance(appId, latestVersionAppBase(appId), initializeCalldata, false);
 
             for (uint256 i = 0; i < roles.length; i++) {
                 acl.createPermission(authorizedAddress, proxy, roles[i], root);
