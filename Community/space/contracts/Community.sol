@@ -27,12 +27,17 @@ contract Community is IForwarder, AragonApp {
     ///@notice space members
     address[] public _members;
 
+    mapping(address => bool) public isMember;
+
     function initialize(string name, address[] members) public onlyInit {
         require(verifyMembers(members), "invalid member address");
 
         _name = name;
         _owner = msg.sender;
         _members = members;
+
+        _members.push(msg.sender);
+        isMember[msg.sender] = true;
 
         initialized();
     }
@@ -104,9 +109,10 @@ contract Community is IForwarder, AragonApp {
     function addMember(address member) public auth(MANAGER_ROLE) {
         require(member != address(0), "invalid member address");
         require(member != msg.sender, "you can't add urself!");
-        require(!doesExist(member), "member already exist in the space");
+        require(!isMember[member], "member already exist in the space");
 
         _members.push(member);
+        isMember[member] = true;
     }
 
     /**
