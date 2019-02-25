@@ -1,14 +1,14 @@
 pragma solidity ^0.4.24;
 
+
 import "@aragon/os/contracts/factory/DAOFactory.sol";
-import "@aragon/os/contracts/kernel/Kernel.sol";
-import "@aragon/os/contracts/acl/ACL.sol";
 import "@aragon/os/contracts/apm/Repo.sol";
 import "@aragon/os/contracts/lib/ens/ENS.sol";
 import "@aragon/os/contracts/lib/ens/PublicResolver.sol";
 //import "@aragon/os/contracts/evmscript/IEVMScriptRegistry.sol"; // needed for EVMSCRIPT_REGISTRY_APP_ID
-import "../node_modules/@aragon/os/contracts/apm/APMNamehash.sol";
+import "@aragon/os/contracts/apm/APMNamehash.sol";
 
+import "./Community.sol";
 
 contract KitBase is APMNamehash {
     ENS public ens;
@@ -17,16 +17,11 @@ contract KitBase is APMNamehash {
     event DeployInstance(address dao);
     event InstalledApp(address appProxy, bytes32 appId);
 
-    constructor (DAOFactory _fac, ENS _ens) public {
+    constructor (ENS _ens) public {
         ens = _ens;
 
-        // If no factory is passed, get it from on-chain bare-kit
-        if (address(_fac) == address(0)) {
-            bytes32 bareKit = apmNamehash("bare-kit");
-            fac = KitBase(latestVersionAppBase(bareKit)).fac();
-        } else {
-            fac = _fac;
-        }
+        bytes32 bareKit = apmNamehash("bare-kit");
+        fac = KitBase(latestVersionAppBase(bareKit)).fac();
     }
 
     function latestVersionAppBase(bytes32 appId) public view returns (address base) {
@@ -51,35 +46,42 @@ contract KitBase is APMNamehash {
     }
 }
 
-contract SpaceKit is KitBase {
+contract Kit is KitBase {
 
     constructor(
         ENS _ens
-    ) KitBase(DAOFactory(0), _ens) public {
+    ) KitBase(_ens) public {
     }
 
-    function newInstance(
-        bytes32 appId, 
-        bytes32[] roles, 
-        address authorizedAddress,
-        bytes initializeCalldata
-    ) public returns (Kernel dao, ERCProxy proxy) {
+    //returns (Kernel dao, ERCProxy space)
+
+    function newInstance() public {
+        bytes32[1] memory appIds = [
+            apmNamehash("coinsence-aragon")       // 0
+        ];
+
         address root = msg.sender;
-        dao = fac.newDAO(this);
+        Kernel dao = fac.newDAO(this);
         ACL acl = ACL(dao.acl());
 
         acl.createPermission(this, dao, dao.APP_MANAGER_ROLE(), this);
 
-        // If there is no appId, an empty DAO will be created
-        if (appId != bytes32(0)) {
-            proxy = dao.newAppInstance(appId, latestVersionAppBase(appId), initializeCalldata, false);
+        // Apps
+        Community space = Community(
+            dao.newAppInstance(
+                appIds[0],
+                latestVersionAppBase(appIds[0])
+            )
+        );
+        emit InstalledApp(space, appIds[0]);
 
-            for (uint256 i = 0; i < roles.length; i++) {
-                acl.createPermission(authorizedAddress, proxy, roles[i], root);
-            }
+        //Community roles
+        acl.createPermission(msg.sender, space, space.MANAGER_ROLE(), root);
+        acl.createPermission(msg.sender, space, space.ISSUE_TOKEN_ROLE(), root);
 
-            emit InstalledApp(proxy, appId);
-        }
+        //init space app
+        address[] memory emptyMembers;
+        space.initialize("coinsence", emptyMembers);
 
         cleanupDAOPermissions(dao, acl, root);
 
