@@ -1,15 +1,9 @@
 pragma solidity ^0.4.24;
 
 
-//import "./KitBase.sol";
 import "@aragon/os/contracts/apps/AragonApp.sol";
-//import "@aragon/os/contracts/kernel/Kernel.sol";
-//import "@aragon/os/contracts/acl/ACL.sol";
-
 import "@aragon/os/contracts/common/IForwarder.sol";
-
 import "@aragon/os/contracts/lib/math/SafeMath.sol";
-
 
 contract Community is IForwarder, AragonApp {
 

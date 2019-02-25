@@ -1,6 +1,6 @@
 const Space = artifacts.require("Community.sol");
 
-const ACL = artifacts.require('@aragon/os/contracts/acl/ACL');
+const ACL = artifacts.require("@aragon/os/contracts/acl/ACL");
 const Kernel = artifacts.require('@aragon/os/contracts/kernel/Kernel');
 const DAOFactory = artifacts.require('@aragon/os/contracts/factory/DAOFactory');
 
