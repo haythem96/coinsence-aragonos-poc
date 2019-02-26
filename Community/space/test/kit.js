@@ -31,7 +31,6 @@ contract('DAO bare kit', (accounts) => {
     describe("New DAO instance", () => {
         it("kit should be defined", async() => {
             assert.notEqual(kit, undefined);
-            console.log(kit.address);
         });
 
         it('it should deploy DAO', async () => {
@@ -45,6 +44,7 @@ contract('DAO bare kit', (accounts) => {
                 })
 
             address.should.not.equal(ADDR_NULL);
+            console.log("dao address " + address);
         });
 
         it('it should install apps', async () => {
@@ -56,6 +56,8 @@ contract('DAO bare kit', (accounts) => {
         });
 
         it('it should initialize apps', async () => {
+            //init space app
+            await space.initialize("coinsence", []);
             ;(await Promise.all([
                 space.hasInitialized(),
             ])).should.deep.equal([true])
@@ -63,11 +65,25 @@ contract('DAO bare kit', (accounts) => {
 
         it('it should set permissions', async () => {
             ;(await Promise.all([
-                //kernel.hasPermission(space.address, kernel.address, await kernel.APP_MANAGER_ROLE(), '0x0'),
-                //kernel.hasPermission(space.address, acl.address, await acl.CREATE_PERMISSIONS_ROLE(), '0x0'),
                 kernel.hasPermission(accounts[0], space.address, await space.MANAGER_ROLE(), '0x0'),
                 kernel.hasPermission(accounts[0], space.address, await space.ISSUE_TOKEN_ROLE(), '0x0'),
             ])).should.deep.equal([true, true])
         });
     });
+
+    describe("space app", async() => {
+
+        it("should add new member", async() => {
+            await space.addMember(accounts[1], { from: accounts[0] });
+            assert.equal(await space.isMember(accounts[1]), true);
+        });
+
+        it("new member should get required permissions", async() => {
+            ;(await Promise.all([
+                acl.hasPermission(accounts[1], space.address, await space.MANAGER_ROLE(), { from: accounts[0] }),
+                acl.hasPermission(accounts[1], space.address, await space.ISSUE_TOKEN_ROLE(), { from: accounts[0] }),
+            ])).should.deep.equal([true])
+        });
+    });
+
 })

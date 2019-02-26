@@ -2,6 +2,8 @@ pragma solidity ^0.4.24;
 
 
 import "@aragon/os/contracts/apps/AragonApp.sol";
+import "@aragon/os/contracts/kernel/Kernel.sol";
+import "@aragon/os/contracts/acl/ACL.sol";
 import "@aragon/os/contracts/common/IForwarder.sol";
 import "@aragon/os/contracts/lib/math/SafeMath.sol";
 
@@ -104,6 +106,12 @@ contract Community is IForwarder, AragonApp {
         require(member != address(0), "invalid member address");
         require(member != msg.sender, "you can't add urself!");
         require(!isMember[member], "member already exist in the space");
+
+        Kernel dao = Kernel(kernel());
+        ACL acl = ACL(dao.acl());
+
+        acl.grantPermission(member, this, MANAGER_ROLE);
+        acl.grantPermission(member, this, ISSUE_TOKEN_ROLE);
 
         _members.push(member);
         isMember[member] = true;

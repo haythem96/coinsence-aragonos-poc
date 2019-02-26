@@ -79,10 +79,6 @@ contract Kit is KitBase {
         acl.createPermission(msg.sender, space, space.MANAGER_ROLE(), root);
         acl.createPermission(msg.sender, space, space.ISSUE_TOKEN_ROLE(), root);
 
-        //init space app
-        address[] memory emptyMembers;
-        space.initialize("coinsence", emptyMembers);
-
         cleanupDAOPermissions(dao, acl, root);
 
         emit DeployInstance(dao);
