@@ -107,8 +107,8 @@ contract Community is IForwarder, AragonApp {
         require(member != msg.sender, "you can't add urself!");
         require(!isMember[member], "member already exist in the space");
 
-        Kernel dao = Kernel(kernel());
-        ACL acl = ACL(dao.acl());
+        //Kernel dao = Kernel(kernel());
+        ACL acl = ACL(kernel().acl());
 
         acl.grantPermission(member, this, MANAGER_ROLE);
         acl.grantPermission(member, this, ISSUE_TOKEN_ROLE);

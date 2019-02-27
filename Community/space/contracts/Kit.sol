@@ -55,7 +55,7 @@ contract Kit is KitBase {
 
     //returns (Kernel dao, ERCProxy space)
 
-    function newInstance() public {
+    function newInstance(string name, address[] members) public {
         bytes32[1] memory appIds = [
             apmNamehash("coinsence-aragon")       // 0
         ];
@@ -75,9 +75,11 @@ contract Kit is KitBase {
         );
         emit InstalledApp(space, appIds[0]);
 
+        space.initialize(name, members);
+
         //Community roles
-        acl.createPermission(msg.sender, space, space.MANAGER_ROLE(), root);
-        acl.createPermission(msg.sender, space, space.ISSUE_TOKEN_ROLE(), root);
+        acl.createPermission(msg.sender, space, space.MANAGER_ROLE(), space);
+        acl.createPermission(msg.sender, space, space.ISSUE_TOKEN_ROLE(), space);
 
         cleanupDAOPermissions(dao, acl, root);
 
