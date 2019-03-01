@@ -1,0 +1,19 @@
+{
+  "appName": "coinsence-kit.aragonpm.eth",
+  "version": "0.0.1",
+  "roles": [
+    {
+      "name": "Dummy role",
+      "id": "DUMMY_ROLE",
+      "params": []
+    }
+  ],
+  "environments": {
+    "default": {
+      "network": "development",
+      "registry": "0x5f6f7e8cc7346a11ca2def8f827b7a0b612c56a1",
+      "appName": "coinsence-kit.aragonpm.eth"
+    }
+  },
+  "path": "contracts/CoinsenceKit.sol"
+}

@@ -1,0 +1,29 @@
+{
+  "name": "@coinsence/coinsence-kit",
+  "version": "0.0.1",
+  "description": "",
+  "author": "Haythem Sellami",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/haythem96/coinsence-aragonos-poc"
+  },
+  "keywords": [],
+  "license": "GPL-3.0",
+  "dependencies": {
+    "@aragon/os": "^4.0.1",
+    "keccak256": "^1.0.0"
+  },
+  "devDependencies": {
+    "@aragon/cli": "^5.2.2",
+    "parcel-bundler": "^1.11.0",
+    "chai": "^4.2.0",
+    "eth-ens-namehash": "^2.0.8"
+  },
+  "scripts": {
+    "start": "aragon run",
+    "test": "aragon contracts test",
+    "compile": "aragon contracts compile",
+    "deploy": "aragon deploy",
+    "start:kit": "aragon run --kit CoinsenceKit --kit-init @ARAGON_ENS"
+  }
+}
