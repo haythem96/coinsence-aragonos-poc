@@ -2,9 +2,12 @@
 **/**/artifact.json
 
 # Dependencies
-node_modules
-**/*/node_modules
+node_modules/
 
 # Ignore lock files
 package-lock.json
 yarn.lock
+
+.cache
+dist
+build
