@@ -53,8 +53,6 @@ contract Kit is KitBase {
     ) KitBase(_ens) public {
     }
 
-    //returns (Kernel dao, ERCProxy space)
-
     function newInstance(string name, address[] members) public {
         bytes32[1] memory appIds = [
             apmNamehash("coinsence-aragon")       // 0
@@ -78,8 +76,8 @@ contract Kit is KitBase {
         space.initialize(name, members);
 
         //Community roles
-        acl.createPermission(msg.sender, space, space.MANAGER_ROLE(), space);
-        acl.createPermission(msg.sender, space, space.ISSUE_TOKEN_ROLE(), space);
+        acl.createPermission(msg.sender, space, space.MANAGER_ROLE(), root);
+        acl.createPermission(msg.sender, space, space.ISSUE_TOKEN_ROLE(), root);
 
         cleanupDAOPermissions(dao, acl, root);
 

@@ -2,12 +2,14 @@ pragma solidity ^0.4.24;
 
 
 import "@aragon/os/contracts/apps/AragonApp.sol";
-import "@aragon/os/contracts/kernel/Kernel.sol";
-import "@aragon/os/contracts/acl/ACL.sol";
+//import "@aragon/os/contracts/kernel/Kernel.sol";
+//import "@aragon/os/contracts/acl/ACL.sol";
 import "@aragon/os/contracts/common/IForwarder.sol";
 import "@aragon/os/contracts/lib/math/SafeMath.sol";
 
 contract Community is IForwarder, AragonApp {
+
+    //Kernel public kernel;
 
     bytes32 public constant MANAGER_ROLE = keccak256("MANAGER_ROLE");
     bytes32 public constant ISSUE_TOKEN_ROLE = keccak256("ISSUE_TOKEN_ROLE");
@@ -107,11 +109,10 @@ contract Community is IForwarder, AragonApp {
         require(member != msg.sender, "you can't add urself!");
         require(!isMember[member], "member already exist in the space");
 
-        //Kernel dao = Kernel(kernel());
-        ACL acl = ACL(kernel().acl());
-
-        acl.grantPermission(member, this, MANAGER_ROLE);
-        acl.grantPermission(member, this, ISSUE_TOKEN_ROLE);
+        //Kernel kernel = Kernel(kernel());
+        //ACL acl = ACL(kernel.acl());
+        //acl.grantPermission(member, this, MANAGER_ROLE);
+        //acl.grantPermission(member, this, ISSUE_TOKEN_ROLE);
 
         _members.push(member);
         isMember[member] = true;

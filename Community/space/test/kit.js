@@ -54,15 +54,14 @@ contract('DAO bare kit', (accounts) => {
             acl = await ACL.at(await kernel.acl());
             space = await Community.at(apps[0].proxy);
         });
-/*
+
         it('it should initialize apps', async () => {
             //init space app
-            await space.initialize("coinsence", []);
             ;(await Promise.all([
                 space.hasInitialized(),
             ])).should.deep.equal([true])
         });
-*/
+
         it('it should set permissions', async () => {
             ;(await Promise.all([
                 kernel.hasPermission(accounts[0], space.address, await space.MANAGER_ROLE(), '0x0'),
@@ -70,24 +69,4 @@ contract('DAO bare kit', (accounts) => {
             ])).should.deep.equal([true, true])
         });
     });
-
-    describe("space app", async() => {
-
-        it("should add new member", async() => {
-            await space.addMember(accounts[1], { from: accounts[0] });
-            assert.equal(await space.isMember(accounts[1]), true);
-        });
-
-        it("new member should get required permissions", async() => {
-            ;(await Promise.all([
-                acl.hasPermission(accounts[1], space.address, await space.MANAGER_ROLE(), { from: accounts[0] }),
-                acl.hasPermission(accounts[1], space.address, await space.ISSUE_TOKEN_ROLE(), { from: accounts[0] }),
-            ])).should.deep.equal([true, true])
-            /*;(await Promise.all([
-                kernel.hasPermission(accounts[1], space.address, await space.MANAGER_ROLE(), '0x0'),
-                kernel.hasPermission(accounts[1], space.address, await space.ISSUE_TOKEN_ROLE(), '0x0')
-            ])).should.deep.equal([true, true])*/
-        });
-    });
-
 })
