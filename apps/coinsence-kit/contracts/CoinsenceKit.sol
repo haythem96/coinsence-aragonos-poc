@@ -65,7 +65,7 @@ contract CoinsenceKit is KitBase {
         acl.createPermission(this, dao, dao.APP_MANAGER_ROLE(), this);
 
         // Apps
-        Community space = Community(
+        Space space = Space(
             dao.newAppInstance(
                 appIds[0],
                 latestVersionAppBase(appIds[0])
