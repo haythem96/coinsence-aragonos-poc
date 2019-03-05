@@ -11,6 +11,8 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@aragon/os": "^4.0.1",
+    "@coinsence/space": "0.0.1",
+    "@coinsence/coin": "0.0.1",
     "keccak256": "^1.0.0"
   },
   "devDependencies": {

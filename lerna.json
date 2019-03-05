@@ -1,0 +1,16 @@
+{
+  "command": {
+    "run": {
+      "concurrency": 1,
+      "scope": "@coinsence/*"
+    },
+    "bootstrap": {
+      "progress": true
+    }
+  },
+  "packages": [
+    "apps/*"
+  ],
+  "hoist": true,
+  "version": "independent"
+}

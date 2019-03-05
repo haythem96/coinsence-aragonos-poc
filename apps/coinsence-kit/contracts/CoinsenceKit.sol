@@ -8,7 +8,7 @@ import "@aragon/os/contracts/lib/ens/PublicResolver.sol";
 //import "@aragon/os/contracts/evmscript/IEVMScriptRegistry.sol"; // needed for EVMSCRIPT_REGISTRY_APP_ID
 import "@aragon/os/contracts/apm/APMNamehash.sol";
 
-import "./Community.sol";
+import "@coinsence/space/contracts/Space.sol";
 
 contract KitBase is APMNamehash {
     ENS public ens;

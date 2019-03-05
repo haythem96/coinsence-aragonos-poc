@@ -1,6 +1,6 @@
 {
-  "name": "app-name",
-  "version": "1.0.0",
+  "name": "@coinsence/coin",
+  "version": "0.0.1",
   "description": "",
   "dependencies": {
     "@aragon/client": "^1.1.0",

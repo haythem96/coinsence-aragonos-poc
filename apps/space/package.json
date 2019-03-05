@@ -1,6 +1,6 @@
 {
   "name": "@coinsence/space",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "dependencies": {
     "@aragon/client": "^1.1.0",
