@@ -9,6 +9,7 @@ import "@aragon/os/contracts/lib/ens/PublicResolver.sol";
 import "@aragon/os/contracts/apm/APMNamehash.sol";
 
 import "@coinsence/space/contracts/Space.sol";
+import "@coinsence/coin/contracts/Coin.sol";
 
 contract KitBase is APMNamehash {
     ENS public ens;
@@ -76,8 +77,8 @@ contract CoinsenceKit is KitBase {
         space.initialize(name, members);
 
         //Community roles
-        acl.createPermission(msg.sender, space, space.MANAGER_ROLE(), root);
-        acl.createPermission(msg.sender, space, space.ISSUE_TOKEN_ROLE(), root);
+        acl.createPermission(msg.sender, space, space.MANAGER_ROLE(), space);
+        acl.createPermission(msg.sender, space, space.ISSUE_TOKEN_ROLE(), space);
 
         cleanupDAOPermissions(dao, acl, root);
 
